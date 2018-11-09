@@ -1,0 +1,26 @@
+<p *ngIf="!pplList"><em>Loading...</em></p>
+<table class='table' *ngIf="pplList">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Gender</th>
+      <th>Location</th>
+      <th>Birthday</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ppl of pplList">
+      <td>{{ ppl.firstName }}</td>
+      <td>{{ ppl.lastName }}</td>
+      <td>{{ ppl.gender }}</td>
+      <td>{{ ppl.location }}</td>
+      <td>{{ ppl.birthday }}</td>
+      <td>{{ ppl.age }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<li><a (click)="getAge()">Logout</a></li>
+

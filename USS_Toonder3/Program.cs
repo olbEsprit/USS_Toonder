@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace USS_Toonder3
-{
+namespace USS_Toonder3 { 
+
     public class Program
     {
         public static void Main(string[] args)

@@ -1,0 +1,21 @@
+<form class="form-signin" #loginForm="ngForm" (ngSubmit)="update(loginForm)">
+  <div class="container-fluid">
+    <h2 class="form-signin-heading">Edit</h2>
+    <br />
+    <label for="FirstName" class="sr-only">First Name</label>
+    <input type="text" id="FirstName" name="FirstName" ngModel class="form-control" placeholder="FirstName" required autofocus>
+    <br />
+    <label for="LastName" class="sr-only">Last Name</label>
+    <input type="text" id="LastName" name="LastName" ngModel class="form-control" placeholder="LastName" required autofocus>
+    <br />
+    <label for="birthday" class="sr-only">Birthday</label>
+    <input type="date" id="birthday" name="birthday" ngModel class="form-control" placeholder="Birthday" />
+    <br />
+    <label for="pictureurl" class="sr-only">Picture URL</label>
+    <input type="url" id="pictureurl" name="pictureurl" ngModel class="form-control" placeholder="Picture URL" />
+
+    <br /><br /><br />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+
+  </div>
+</form>
