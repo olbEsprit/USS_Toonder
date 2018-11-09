@@ -13,9 +13,20 @@
     <br />
     <label for="pictureurl" class="sr-only">Picture URL</label>
     <input type="url" id="pictureurl" name="pictureurl" ngModel class="form-control" placeholder="Picture URL" />
-
-    <br /><br /><br />
+    <br />
+    <label for="gender" class="sr-only">Gender</label>
+    <select id="gender" name="gender" ngModel class="form-control">
+      <option ngValue="male">Male</option>
+      <option ngValue="female">Female</option>
+    </select>
+    <br />
+    <label for="location" class="sr-only">Location</label>
+    <select id="location" name="location" ngModel class="form-control">
+      <option ngValue="Kyiv">Kyiv</option>
+      <option ngValue="Lviv">Lviv</option>
+      <option ngValue="Rivne">Rivne</option>
+    </select>
+    <br />
     <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-
   </div>
 </form>
