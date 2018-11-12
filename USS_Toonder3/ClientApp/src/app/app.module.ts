@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtHelper } from 'angular2-jwt';
 import { RegistrationComponent } from './login/registration/registration.component';
 import { MyPageComponent } from './Components/my-page-component/my-page.component';
+import { PersonPageComponent } from './Components/person-page/person-page.component';
 
 
 
@@ -24,7 +25,7 @@ import { MyPageComponent } from './Components/my-page-component/my-page.componen
     NavMenuComponent,
     HomeComponent,
     PeopleCarouserComponent,
-   // PersonPageComponent,
+    PersonPageComponent,
     LoginComponent,
     RegistrationComponent,
     MyPageComponent
@@ -53,6 +54,7 @@ import { MyPageComponent } from './Components/my-page-component/my-page.componen
       { path: 'registration', component: RegistrationComponent },
       { path: 'my-page', component: MyPageComponent },
       { path: 'people-carousel', component: PeopleCarouserComponent },
+      { path: 'person/:id', component: PersonPageComponent },
       {
       path: '**',
       redirectTo: 'home'

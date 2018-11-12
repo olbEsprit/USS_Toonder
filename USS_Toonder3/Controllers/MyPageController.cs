@@ -74,6 +74,14 @@ namespace USS_Toonder3.Controllers
             return user;
         }
 
+        [HttpGet]
+        [Route("api/MyPage/GetUserByID/{id}")]
+        public async Task<AppUser> GetUserByID([FromRoute] string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            return user;
+        }
+
 
     }
 }

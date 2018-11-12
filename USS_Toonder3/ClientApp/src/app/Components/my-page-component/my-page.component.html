@@ -1,6 +1,6 @@
 <h2 class="form-signin-heading">Edit</h2>
-
-<form novalidate [formGroup]="form" (ngSubmit)="update(form)">
+<p *ngIf="!user"><em>Loading...</em></p>
+<form novalidate [formGroup]="form" (ngSubmit)="update(form)" *ngIf="user">
   <div class="container-fluid">
     First Name: <input type="text" formControlName="firstName" class="form-control"><br />
     Last Name: <input type="text" formControlName="lastName" class="form-control"><br />

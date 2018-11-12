@@ -55,6 +55,7 @@ export class MyPageComponent implements OnInit {
   }
 
 
+
   private populateForm() {
     let date = this.user.birthday.split("T");
     this.form.patchValue({

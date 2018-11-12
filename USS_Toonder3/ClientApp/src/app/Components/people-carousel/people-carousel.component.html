@@ -13,11 +13,13 @@
   <tbody>
     <tr *ngFor="let ppl of pplList">
       <td>{{ ppl.firstName }}</td>
-      <td>{{ ppl.lastName }}</td>
       <td>{{ ppl.gender }}</td>
       <td>{{ ppl.location }}</td>
       <td>{{ ppl.age }}</td>
-      <td><img src="{{ppl.pictureUrl}}" width="100" height="100"/></td>
+      <td><img src="{{ppl.pictureUrl}}" width="100" height="100" /></td>
+      <td>
+        <a [routerLink]="['/person', ppl.id]" class="btn btn-sm btn-primary">Details</a>
+      </td>
     </tr>
   </tbody>
 </table>

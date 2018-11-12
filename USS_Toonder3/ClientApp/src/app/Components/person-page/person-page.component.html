@@ -1,12 +1,14 @@
-<h1>{{title}}</h1>
-<h3>Employee</h3>
-<hr />
-
-<h5>ID:{{ emp.employeeId}}</h5>
-<h5>Name:{{ emp.name}}</h5>
-<h5>Gender:{{ emp.gender}}</h5>
-<h5>Department:{{ emp.department}}</h5>
-<h5>City:{{ emp.city}}</h5>
-<button class="btn" (click)="cancel()">Cancel</button>
-
-
+<p *ngIf="!person"><em>Loading...</em></p>
+<div class="container" *ngIf="person">
+  <div class="row">
+    <div class="col-3">
+      <br /><img src="{{person.pictureUrl}}" width="200" height="200" />
+    </div>
+    <div class="col-5">
+      <h4>{{person.firstName}} {{person.lastName}}, {{person.age}}</h4>
+      <h5>{{person.gender}}</h5>
+      <h5>{{person.location}}</h5>
+      <h5>Born on {{person.birthday}}</h5>
+    </div>
+  </div>
+</div>

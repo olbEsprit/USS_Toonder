@@ -1,33 +1,50 @@
-/*import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable, Inject, } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FetchEmployeeComponent } from '../fetch-employee/fetch-employee.component';
-import { EmpserviceService } from '../../services/empservice.service';
-import { Employee } from '../../employee';
+import { Person } from '../../person';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
+@Injectable()
 @Component({
   templateUrl: './person-page.component.html',
   styleUrls: ['./person-page.component.css']
 })
 export class PersonPageComponent implements OnInit {
   title: string = "Details";
-  employeeId: number;
+  personId: string;
   errorMessage: any;
-  emp: Employee;
-  constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute, private _employeeService: EmpserviceService, private _router: Router) {
+  person: Person;
+  myAppUrl: string = "";
+
+  constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute, private _router: Router, private http: HttpClient, @Inject('BASE_URL') baseUrl: string, ) {
     if (this._avRoute.snapshot.params["id"]) {
-      this.employeeId = this._avRoute.snapshot.params["id"];
+      this.personId = this._avRoute.snapshot.params["id"];
     }
   }
   ngOnInit() {
-    if (this.employeeId > 0) {
-      this._employeeService.getEmployeeById(this.employeeId).subscribe(resp => this.emp = resp, error => this.errorMessage = error);
+    if (this.personId != null) {
+      this.http.get(this.myAppUrl + 'api/mypage/getuserbyid/' + this.personId, {
+        headers: new HttpHeaders({ "Content-Type": "application/json" })
+      }).subscribe(response => {
+        console.log(response);
+        this.person = response;
+        var today = new Date();
+        var bd = new Date(this.person.birthday);
+        var age = ((today - bd) / (31557600000));
+        var age = Math.floor(age);
+        this.person.age = age;
+        this.person.birthday = bd.toDateString();
+      }, err => console.log(err));
     }
   }
-  
+
+
+
   cancel() {
-    this._router.navigate(['/fetch-employee']);
+    this._router.navigate(['/people-carouse']);
   }
 
 }  
-*/
+

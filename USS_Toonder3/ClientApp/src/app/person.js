@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Person = /** @class */ (function () {
-    function Person(firstName, lastName, gender, location, birthday, pictureUrl, age) {
+    function Person(id, firstName, lastName, gender, location, birthday, pictureUrl, age) {
     }
     return Person;
 }());
