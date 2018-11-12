@@ -65,5 +65,15 @@ namespace USS_Toonder3.Controllers
             }); 
         }
 
+
+        [HttpGet]
+        [Route("api/MyPage/GetUserByEmail/{email}")]
+        public async Task<AppUser> GetUserByEmail([FromRoute] string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user;
+        }
+
+
     }
 }

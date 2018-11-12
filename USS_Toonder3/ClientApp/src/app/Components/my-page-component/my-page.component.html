@@ -1,32 +1,21 @@
-<form class="form-signin" #loginForm="ngForm" (ngSubmit)="update(loginForm)">
+<h2 class="form-signin-heading">Edit</h2>
+
+<form novalidate [formGroup]="form" (ngSubmit)="update(form)">
   <div class="container-fluid">
-    <h2 class="form-signin-heading">Edit</h2>
-    <br />
-    <label for="FirstName" class="sr-only">First Name</label>
-    <input type="text" id="FirstName" name="FirstName" ngModel class="form-control" placeholder="FirstName" required autofocus>
-    <br />
-    <label for="LastName" class="sr-only">Last Name</label>
-    <input type="text" id="LastName" name="LastName" ngModel class="form-control" placeholder="LastName" required autofocus>
-    <br />
-    <label for="birthday" class="sr-only">Birthday</label>
-    <input type="date" id="birthday" name="birthday" ngModel class="form-control" placeholder="Birthday" />
-    <br />
-    <label for="pictureurl" class="sr-only">Picture URL</label>
-    <input type="url" id="pictureurl" name="pictureurl" ngModel class="form-control" placeholder="Picture URL" />
-    <br />
-    <label for="gender" class="sr-only">Gender</label>
-    <select id="gender" name="gender" ngModel class="form-control">
+    First Name: <input type="text" formControlName="firstName" class="form-control"><br />
+    Last Name: <input type="text" formControlName="lastName" class="form-control"><br />
+    Birthday: <input type="date" formControlName="birthday" class="form-control"><br />
+    Picture link: <input type="text" formControlName="pictureUrl" class="form-control"><br />
+    Gender: <select formControlName="gender" class="form-control">
       <option ngValue="male">Male</option>
       <option ngValue="female">Female</option>
-    </select>
-    <br />
-    <label for="location" class="sr-only">Location</label>
-    <select id="location" name="location" ngModel class="form-control">
+     </select><br />
+    Location: <select formControlName="location" class="form-control">
       <option ngValue="Kyiv">Kyiv</option>
       <option ngValue="Lviv">Lviv</option>
       <option ngValue="Rivne">Rivne</option>
-    </select>
-    <br />
+    </select><br />
     <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
   </div>
 </form>
+

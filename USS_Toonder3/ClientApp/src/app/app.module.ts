@@ -12,9 +12,11 @@ import { PeopleService } from './services/people.service';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtHelper } from 'angular2-jwt'
+import { JwtHelper } from 'angular2-jwt';
 import { RegistrationComponent } from './login/registration/registration.component';
-import { MyPageComponent } from './Components/my-page-component/my-page.component'
+import { MyPageComponent } from './Components/my-page-component/my-page.component';
+
+
 
 @NgModule({
   declarations: [
@@ -36,6 +38,9 @@ import { MyPageComponent } from './Components/my-page-component/my-page.componen
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    //MatButtonModule,
+    //MatInputModule,
+    //MatCardModule,
     RouterModule.forRoot([{
       path: '',
       component: HomeComponent,
