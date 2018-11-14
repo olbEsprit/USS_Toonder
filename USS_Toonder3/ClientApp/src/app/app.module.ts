@@ -16,6 +16,8 @@ import { JwtHelper } from 'angular2-jwt';
 import { RegistrationComponent } from './login/registration/registration.component';
 import { MyPageComponent } from './Components/my-page-component/my-page.component';
 import { PersonPageComponent } from './Components/person-page/person-page.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+
 
 
 
@@ -39,9 +41,6 @@ import { PersonPageComponent } from './Components/person-page/person-page.compon
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    //MatButtonModule,
-    //MatInputModule,
-    //MatCardModule,
     RouterModule.forRoot([{
       path: '',
       component: HomeComponent,
@@ -58,7 +57,7 @@ import { PersonPageComponent } from './Components/person-page/person-page.compon
       {
       path: '**',
       redirectTo: 'home'
-    }])
+      }])
   ],
   providers: [JwtHelper, AuthGuard, PeopleService],
   bootstrap: [AppComponent]

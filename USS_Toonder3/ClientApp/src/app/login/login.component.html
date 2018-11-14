@@ -1,3 +1,6 @@
+
+
+
 <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
   <div class="container-fluid">
     <h2 class="form-signin-heading">Login</h2>
@@ -12,3 +15,12 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   </div>
 </form>
+
+<div align="center">
+  <h4 id="WelcomeMessage"></h4>
+  <button class="btn btn-lg btn-primary btn-block" id="SignIn" onclick="signIn()">Sign in with Microsoft</button>
+  <br /><br />
+  <pre id="json"></pre>
+</div>
+
+
