@@ -15,8 +15,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using USS_Toonder.Models;
 using USS_Toonder3.Models;
 using USS_Toonder3.Models.Entities;
+using Google.Apis.Auth;
+using Google.Apis.Auth.OAuth2;
 
 namespace USS_Toonder3.Controllers
 {
@@ -51,7 +54,7 @@ namespace USS_Toonder3.Controllers
             }
             var user = new AppUser()
             {
-                UserName = model.UserName,
+                UserName = model.Email.Split('@')[0],
                 Email = model.Email
             };
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -115,5 +118,43 @@ namespace USS_Toonder3.Controllers
         }
 
 
+        [HttpPost("CreateToken")]
+        [Route("api/Auth/GoogleLogin")]
+        public async Task<IActionResult> GoogleLogin([FromBody] string token)
+        {
+            GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(token);
+            var user = await _userManager.FindByEmailAsync(payload.Email);
+            if (user == null)
+            {
+                var new_user = new AppUser()
+                {
+                    UserName = payload.Email.Split('@')[0],
+                    Email = payload.Email,
+                    EmailConfirmed = payload.EmailVerified,
+                    FirstName = payload.GivenName,
+                    LastName = payload.FamilyName,
+                    PictureUrl = payload.Picture
+                };
+
+                var result = await _userManager.CreateAsync(new_user);
+                
+                if (result.Succeeded)
+                {
+                    return Ok(token);
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("error", error.Description);
+                }
+                return BadRequest(result.Errors);
+            }
+            else
+            {
+                return Ok(token);
+            }
+            //return Ok(payload);
+
         }
+
+    }
 }

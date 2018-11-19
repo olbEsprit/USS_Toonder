@@ -16,9 +16,26 @@ import { JwtHelper } from 'angular2-jwt';
 import { RegistrationComponent } from './login/registration/registration.component';
 import { MyPageComponent } from './Components/my-page-component/my-page.component';
 import { PersonPageComponent } from './Components/person-page/person-page.component';
-import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthService } from './Services/auth.service';
+import { Configs } from './shared/env.config';
+import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
 
+const gLoginOpt: LoginOpt = {
+  scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me'
+}
 
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("1072048862399-864n2rhra02bgrb9at1a1s45aikloqia.apps.googleusercontent.com", gLoginOpt)
+    
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 
 @NgModule({
@@ -37,10 +54,11 @@ import { OAuthModule } from 'angular-oauth2-oidc';
       appId: 'ng-cli-universal'
     }),
     HttpClientModule,
-    CommonModule,
     HttpModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SocialLoginModule,
     RouterModule.forRoot([{
       path: '',
       component: HomeComponent,
@@ -57,9 +75,19 @@ import { OAuthModule } from 'angular-oauth2-oidc';
       {
       path: '**',
       redirectTo: 'home'
-      }])
+      }]),
   ],
-  providers: [JwtHelper, AuthGuard, PeopleService],
+  providers: [
+    JwtHelper,
+    AuthGuard,
+    PeopleService,
+    {
+    provide: AuthServiceConfig,
+    useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }  
+export class AppModule {
+
+}  

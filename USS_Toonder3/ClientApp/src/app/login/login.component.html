@@ -1,26 +1,30 @@
 
 
+  <div class="row">
+    <div class="column">
+      <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+          <h2 class="form-signin-heading">Login</h2>
+          <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password.</div>
+          <br />
+          <label for="Email" class="sr-only">Email</label>
+          <input type="email" id="Email" name="Email" ngModel class="form-control" placeholder="Email" required autofocus>
+          <br />
+          <label for="password" class="sr-only">Password</label>
+          <input type="password" id="Password" name="Password" ngModel class="form-control" placeholder="Password" required>
+          <br />
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+    </div>
+    
+    <div class="column" *ngIf="!user">
+      <h2 class="form-signin-heading">Login options</h2>
+      <br />
+      <button class="btn btn-lg btn-primary btn-block" (click)="signInWithGoogle()">Sing in with Google</button>
+      <button class="btn btn-lg btn-primary btn-block"  disabled>Sing in with Facebook</button>
+      <button class="btn btn-lg btn-primary btn-block"  disabled>Sing in with Microsoft</button>
 
-<form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-  <div class="container-fluid">
-    <h2 class="form-signin-heading">Login</h2>
-    <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password.</div>
-    <br />
-    <label for="Email" class="sr-only">Email</label>
-    <input type="email" id="Email" name="Email" ngModel class="form-control" placeholder="Email" required autofocus>
-    <br />
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" id="Password" name="Password" ngModel class="form-control" placeholder="Password" required>
-    <br />
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </div>
-</form>
+    </div>
+    </div>
 
-<div align="center">
-  <h4 id="WelcomeMessage"></h4>
-  <button class="btn btn-lg btn-primary btn-block" id="SignIn" onclick="signIn()">Sign in with Microsoft</button>
-  <br /><br />
-  <pre id="json"></pre>
-</div>
 
 
