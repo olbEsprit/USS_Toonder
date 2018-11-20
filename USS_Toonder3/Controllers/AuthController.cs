@@ -78,7 +78,8 @@ namespace USS_Toonder3.Controllers
             try
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
-                if(user == null) {
+                if (user == null)
+                {
                     return Unauthorized();
                 }
                 if (_passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password) == PasswordVerificationResult.Success)
@@ -137,7 +138,7 @@ namespace USS_Toonder3.Controllers
                 };
 
                 var result = await _userManager.CreateAsync(new_user);
-                
+
                 if (result.Succeeded)
                 {
                     return Ok(token);
@@ -156,5 +157,56 @@ namespace USS_Toonder3.Controllers
 
         }
 
+
+        [HttpPost("CreateToken")]
+        [Route("api/Auth/MSLogin")]
+        public async Task<IActionResult> MSLoginAsync([FromBody] MSViewModel token)
+        {
+            if(token.Iss == "https://login.microsoftonline.com/9188040d-6c67-4c5b-b112-36a304b66dad/v2.0")
+            {
+                var user = await _userManager.FindByEmailAsync(token.PreferredUsername);
+                if (user == null)
+                {
+                    var new_user = new AppUser()
+                    {
+                        UserName = token.PreferredUsername.Split('@')[0],
+                        Email = token.PreferredUsername,
+                        FirstName = token.Name.Split(' ')[0],
+                        LastName = token.Name.Split(' ')[1],
+                        Birthday = DateTime.MinValue
+                    };
+
+                    var result = await _userManager.CreateAsync(new_user);
+                }
+
+                var userClaims = await _userManager.GetClaimsAsync(user);
+
+                var claims = new[]
+                {
+                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email)
+                    }.Union(userClaims);
+
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+                var tokeOptions = new JwtSecurityToken(
+                   issuer: "http://localhost:5000",
+                   audience: "http://localhost:5000",
+                   claims: claims,
+                   expires: DateTime.Now.AddMinutes(60),
+                   signingCredentials: signinCredentials
+               );
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(tokeOptions),
+                    expiration = tokeOptions.ValidTo
+                });
+
+            }
+            return Ok();
+        }
     }
 }

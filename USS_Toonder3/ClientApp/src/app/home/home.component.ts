@@ -22,7 +22,7 @@ export class HomeComponent  {
   isUserAuthenticated() {
     let token: string = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
-      console.log(this.jwtHelper.decodeToken(token));
+      //console.log(this.jwtHelper.decodeToken(token));
       return true;
     }
     else {

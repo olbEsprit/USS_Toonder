@@ -31,6 +31,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Identity.Client" Version="2.4.1-preview" />
     <PackageReference Include="Microsoft.Owin.Cors" Version="2.1.0" />
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="2.1.0" />
     <PackageReference Include="Microsoft.Owin.Security.Jwt" Version="2.1.0" />

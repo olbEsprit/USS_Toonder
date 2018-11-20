@@ -20,8 +20,10 @@
       <h2 class="form-signin-heading">Login options</h2>
       <br />
       <button class="btn btn-lg btn-primary btn-block" (click)="signInWithGoogle()">Sing in with Google</button>
-      <button class="btn btn-lg btn-primary btn-block"  disabled>Sing in with Facebook</button>
-      <button class="btn btn-lg btn-primary btn-block"  disabled>Sing in with Microsoft</button>
+      <button class="btn btn-lg btn-primary btn-block" (click)="signInWithFB()" disabled>Sing in with Facebook</button>
+      <button class="btn btn-lg btn-primary btn-block" (click)="signInWithMS()">Sing in with Microsoft</button>
+      <button class="btn btn-lg btn-primary btn-block" (click)="check()">S</button>
+
 
     </div>
     </div>

@@ -19,7 +19,7 @@ import { PersonPageComponent } from './Components/person-page/person-page.compon
 import { AuthService } from './Services/auth.service';
 import { Configs } from './shared/env.config';
 import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
-import { GoogleLoginProvider } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 
 const gLoginOpt: LoginOpt = {
   scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me'
@@ -29,7 +29,10 @@ let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider("1072048862399-864n2rhra02bgrb9at1a1s45aikloqia.apps.googleusercontent.com", gLoginOpt)
-    
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("359956664774272")
   }
 ]);
 
